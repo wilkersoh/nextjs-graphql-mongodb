@@ -32,6 +32,5 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
     WithApollo.getInitialProps = async (ctx) => {
       const { AppTree } = ctx;
     };
-    git;
   }
 }
