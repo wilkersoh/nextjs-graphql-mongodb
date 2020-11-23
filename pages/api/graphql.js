@@ -1,39 +1,6 @@
-import { ApolloServer, gql } from "apollo-server-micro";
-import { makeExecutableSchema } from "graphql-tools";
+import { ApolloServer } from "apollo-server-micro";
 import { MongoClient } from "mongodb";
-
-const typeDefs = gql`
-  type User {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    blog: String
-    stars: Int
-  }
-
-  type Query {
-    users: [User]!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    users(_parent, _args, _context, _info) {
-      return _context.db
-        .collection("users")
-        .find()
-        .toArray()
-        .then((data) => {
-          return data;
-        });
-    },
-  },
-};
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+import { schema } from "../../apollo/schema";
 
 let db;
 
